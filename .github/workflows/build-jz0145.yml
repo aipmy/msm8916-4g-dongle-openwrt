@@ -52,6 +52,17 @@ jobs:
         git clone https://git.openwrt.org/openwrt/openwrt.git openwrt
         git -C openwrt checkout ${{ steps.resolve.outputs.version }}
 
+    - name: Cache build toolchain and downloads
+      uses: actions/cache@v4
+      with:
+        path: |
+          openwrt/dl
+          openwrt/staging_dir/host
+          openwrt/staging_dir/toolchain-*
+        key: openwrt-${{ steps.resolve.outputs.version }}-${{ hashFiles('openwrt-build/diffconfig_uz801') }}
+        restore-keys: |
+          openwrt-${{ steps.resolve.outputs.version }}-
+
     - name: Load msm89xx target (pinned upstream)
       run: |
         git clone https://github.com/hkfuertes/msm8916-openwrt.git upstream-msm
