@@ -35,7 +35,9 @@ EDL_DIR = os.path.join(PROJECT_DIR, "edl")
 BACKUPS_DIR = os.path.join(PROJECT_DIR, "backups")
 DEFAULT_LOADER = os.path.join(EDL_DIR, "MSM8916_UZ801.bin")
 
-EDL_PYTHON = os.path.join(EDL_DIR, "venv", "bin", "python3")
+EDL_PYTHON = os.path.join(PROJECT_DIR, "venv", "bin", "python3")
+if not os.path.exists(EDL_PYTHON):
+    EDL_PYTHON = os.path.join(EDL_DIR, "venv", "bin", "python3")
 if not os.path.exists(EDL_PYTHON):
     EDL_PYTHON = sys.executable
 
