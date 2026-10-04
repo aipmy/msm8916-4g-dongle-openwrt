@@ -3,6 +3,7 @@
 > **All-in-One Flasher, EDL 9008 Recovery, Multi-Board DTB Patching, and OpenWrt Toolkit for Qualcomm MSM8916 Chinese 4G LTE USB Dongles (UZ801 v3, JZ0145, FY Series).**
 
 [![GitHub Stars](https://img.shields.io/github/stars/aipmy/msm8916-4g-dongle-openwrt?style=flat-square)](https://github.com/aipmy/msm8916-4g-dongle-openwrt/stargazers)
+[![Build OpenWrt Firmware](https://github.com/aipmy/msm8916-4g-dongle-openwrt/actions/workflows/build-jz0145.yml/badge.svg)](https://github.com/aipmy/msm8916-4g-dongle-openwrt/actions/workflows/build-jz0145.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-Qualcomm%20MSM8916%20%28Snapdragon%20410%29-orange.svg?style=flat-square)]()
 [![OpenWrt](https://img.shields.io/badge/OpenWrt-v25.12.5-green.svg?style=flat-square)](https://openwrt.org)

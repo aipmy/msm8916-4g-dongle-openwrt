@@ -31,4 +31,10 @@ The kernel DTB is patched inside `boot.img` with:
 ## 2. Carrier Configuration Injection (`MCFG_SW_ROW.MBN`)
 The baseband firmware requires an MBN profile to initialize cellular radio networks in Europe, Asia, and the Rest of the World (ROW).
 
-In standard OpenWrt images, this profile is omitted. Our patched rootfs includes `MCFG_SW_ROW.MBN` extracted from the factory Android system partition and pre-installed at `/lib/firmware/MCFG_SW.MBN`.
+---
+
+## 3. LED Trigger Configuration (netdev & activity)
+On stock OpenWrt images, `CONFIG_LEDS_TRIGGER_NETDEV` is disabled by default. In our custom build:
+- Kernel driver `CONFIG_LEDS_TRIGGER_NETDEV=y` is compiled in.
+- LuCI web dashboard (`/cgi-bin/luci/admin/system/leds`) natively supports assigning **Network device (`netdev`)** activity (Tx/Rx packet blinks) to `green:wan` or `blue:wlan`.
+

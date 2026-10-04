@@ -120,3 +120,15 @@ jobs:
           ${{ env.FIRMWARE }}/openwrt-msm89xx-*.manifest
           ${{ env.FIRMWARE }}/openwrt-msm89xx-*-flash.sh
           ${{ env.FIRMWARE }}/openwrt-msm89xx-*-firmware.zip
+
+    - name: Create Release
+      if: env.UPLOAD_FIRMWARE == 'true' && startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          ${{ env.FIRMWARE }}/openwrt-msm89xx-*-squashfs-boot.img
+          ${{ env.FIRMWARE }}/openwrt-msm89xx-*-squashfs-system.img
+          ${{ env.FIRMWARE }}/openwrt-msm89xx-*-squashfs-gpt_both0.bin
+          ${{ env.FIRMWARE }}/openwrt-msm89xx-*.manifest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
