@@ -53,12 +53,18 @@ edl/venv/bin/pip install -r edl/requirements.txt
 
 ## Quick Start
 
-### 1. Interactive Menu (Recommended)
+### 1. Clone Repository & Setup
+```bash
+git clone https://github.com/aipmy/msm8916-4g-dongle-openwrt.git
+cd msm8916-4g-dongle-openwrt
+```
+
+### 2. Interactive Menu (Recommended)
 ```bash
 python3 flasher.py
 ```
 
-### 2. One-Line Flash OpenWrt
+### 3. One-Line Flash OpenWrt
 - **For New Revision (Board JZ0145):**
   ```bash
   python3 flasher.py --flash-openwrt --board 1 --skip-backup
