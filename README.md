@@ -78,6 +78,17 @@ python3 flasher.py
 
 ---
 
+## Credits & Acknowledgements
+
+Special thanks and appreciation to the open-source projects and researchers that made this toolkit possible:
+
+- **[B. Kerler (@bkerler)](https://github.com/bkerler/edl)** - For the invaluable `edl` toolset (Qualcomm Sahara / Firehose Client).
+- **[AlienWolfX (@AlienWolfX)](https://github.com/AlienWolfX/UZ801-USB-MODEM)** - For extensive hardware reverse engineering, PCB pinouts, and documentation on the UZ801 USB dongle.
+- **[hkfuertes (@hkfuertes)](https://github.com/hkfuertes/msm8916-openwrt)** - For maintaining modern OpenWrt builds for Qualcomm MSM8916 devices.
+- **[OpenStick Community & PostmarketOS](https://github.com/OpenStick)** - For pioneering Linux on Qualcomm 4G sticks.
+
+---
+
 ## Contributing
 
 Contributions are welcome! If you have insights or modifications for other Qualcomm MSM8916 board variants, feel free to submit a pull request or open an issue.
