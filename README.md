@@ -28,8 +28,8 @@
 
 ```text
 msm8916-4g-dongle-openwrt/
-├── check_edl.py                  # Script CLI utama (Probe, Backup, Restore, Flash)
-├── openwrt_firmwares/
+├── flasher.py                    # Script CLI utama (Probe, Backup, Restore, Flash)
+├── firmware/
 │   ├── JZ0145_V40_20260509/      # Firmware OpenWrt (Kernel DTB patched + RootFS pre-injected)
 │   └── FY_UZ801_V3.31/           # Firmware OpenWrt untuk board FY standar
 ├── backups/
@@ -46,7 +46,7 @@ msm8916-4g-dongle-openwrt/
 ### 1. Mode Menu Interaktif (Direkomendasikan)
 Jalankan script di terminal:
 ```bash
-python3 check_edl.py
+python3 flasher.py
 ```
 Menu operasi yang tersedia:
 ```text
@@ -66,11 +66,11 @@ Menu operasi yang tersedia:
 
 - **Untuk Board Baru (JZ0145):**
   ```bash
-  python3 check_edl.py --flash-openwrt --board 1 --skip-backup
+  python3 flasher.py --flash-openwrt --board 1 --skip-backup
   ```
 - **Untuk Board Lama (FY_UZ801):**
   ```bash
-  python3 check_edl.py --flash-openwrt --board 2
+  python3 flasher.py --flash-openwrt --board 2
   ```
 
 *Script akan otomatis mendeteksi apakah modem sedang menyala di Android (otomatis kirim `adb reboot edl`) atau sudah di mode EDL 9008.*
