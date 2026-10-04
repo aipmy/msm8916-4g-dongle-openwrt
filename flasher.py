@@ -781,6 +781,19 @@ def main():
 
     print_banner()
 
+    # Periksa ketersediaan library Python pihak ketiga untuk EDL
+    missing_deps = []
+    for pkg in ["usb", "serial", "docopt"]:
+        try:
+            __import__(pkg)
+        except ImportError:
+            missing_deps.append(pkg)
+    
+    if missing_deps and not os.path.exists(os.path.join(EDL_DIR, "venv")):
+        log(f"{SYM_WARN} Beberapa dependensi Python EDL belum terpasang di sistem global: {', '.join(missing_deps)}")
+        log(f"{SYM_INFO} Disarankan membuat venv otomatis: {C_GREEN}python3 -m venv edl/venv && edl/venv/bin/pip install -r edl/requirements.txt{C_RESET}")
+        print()
+
     log(f"{SYM_INFO} Memeriksa integritas dependensi toolset...")
     print(f"      EDL Tool Path : {C_WHITE}{EDL_DIR}{C_RESET}")
     print(f"      Loader MBN    : {C_WHITE}{args.loader}{C_RESET} ({'ADA' if os.path.exists(args.loader) else 'TIDAK DITEMUKAN'})")

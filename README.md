@@ -31,6 +31,26 @@ It includes hardware-level fixes for newer board revisions (`JZ0145_V40_20260509
 
 ---
 
+## Prerequisites & Dependencies
+
+To communicate with the Qualcomm chip over USB EDL, the following packages are required:
+
+### macOS
+```bash
+brew install libusb
+python3 -m venv edl/venv
+edl/venv/bin/pip install -r edl/requirements.txt
+```
+
+### Linux (Debian / Ubuntu / Raspberry Pi)
+```bash
+sudo apt update && sudo apt install -y python3-dev python3-pip libusb-1.0-0-dev
+python3 -m venv edl/venv
+edl/venv/bin/pip install -r edl/requirements.txt
+```
+
+---
+
 ## Quick Start
 
 ### 1. Interactive Menu (Recommended)
