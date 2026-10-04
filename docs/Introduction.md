@@ -4,6 +4,26 @@ This repository provides an automated, unified Python toolkit (`flasher.py`) to 
 
 ---
 
+## Hardware Reference Photos
+
+Below are reference photographs of the classic dongle casing, PCB layout, Qualcomm MSM8916 SoC, PMIC, and eMMC storage:
+
+| Outer Casing Front | Outer Casing Back |
+| :---: | :---: |
+| ![front](https://i.ibb.co/55fNj7D/front.jpg) | ![back](https://i.ibb.co/2s72SLL/back.jpg) |
+
+| PCB Board (Top View) | PCB Board (Bottom View) |
+| :---: | :---: |
+| ![board1](https://i.ibb.co/5vZXKMQ/board1.jpg) | ![board2](https://i.ibb.co/1Z8WZq0/board2.jpg) |
+
+| Qualcomm MSM8916 SoC | Storage eMMC / PM8916 PMIC |
+| :---: | :---: |
+| ![cpu](https://i.ibb.co/sbChyH9/cpu.jpg) | ![storage](https://i.ibb.co/Z8mh33d/storage.jpg) |
+
+*(Reference images credit: AlienWolfX/UZ801-USB-MODEM analysis)*
+
+---
+
 ## The Problem
 Many users acquire Snapdragon 410 dongles expecting them to behave identically. However, manufacturers frequently revise PCB layouts and baseband firmware while keeping the same outer plastic shell.
 
