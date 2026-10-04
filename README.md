@@ -35,6 +35,9 @@ It includes hardware-level fixes for newer board revisions (`JZ0145_V40_20260509
 
 Ensure your system has the required USB drivers and Python 3 installed:
 
+- **Windows**:
+  1. Install [Python 3](https://www.python.org/downloads/) (Make sure to check *"Add Python to PATH"* during setup).
+  2. Install [Qualcomm HS-USB QDLoader 9008 Driver](https://gsmusbdriver.com/qualcomm-hs-usb-qdloader-9008) or use **Zadig** (included in `edl/Drivers/Windows/zadig-2.8.exe`) to install `WinUSB` or `libusb-win32` driver for VID `05C6` PID `9008`.
 - **macOS**:
   ```bash
   brew install libusb
@@ -55,15 +58,24 @@ cd msm8916-4g-dongle-openwrt
 ```
 
 ### 2. Setup Virtual Environment & Install Dependencies
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r edl/requirements.txt
-```
+
+- **On Windows (PowerShell / Command Prompt):**
+  ```powershell
+  python -m venv venv
+  .\venv\Scripts\activate
+  pip install -r edl/requirements.txt
+  ```
+
+- **On macOS / Linux:**
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+  pip install -r edl/requirements.txt
+  ```
 
 ### 3. Run Flasher (Interactive Menu)
 ```bash
-python3 flasher.py
+python flasher.py
 ```
 
 ### 4. One-Line Flash OpenWrt (Direct CLI)
