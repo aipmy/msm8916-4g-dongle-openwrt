@@ -1,0 +1,45 @@
+--- a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
++++ b/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
+@@ -16,9 +16,47 @@
+  &led_b {
+  	gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
++	function = LED_FUNCTION_WLAN;
++	linux,default-trigger = "netdev";
+  };
++/* JZ0145_V40_20260509: LED fisik R=GPIO25 G=GPIO6 B=GPIO7.
++ * SIM switch elektronik: S1=GPIO22 HIGH, S2=GPIO23 HIGH,
++ * S3=GPIO1 LOW, simdet=GPIO52 HIGH (hasil reverse-engineering
++ * DTB Android pabrik board JZ0145, bukan bagian upstream). */
+  &led_g {
+-	gpios = <&tlmm 8 GPIO_ACTIVE_HIGH>;
++	gpios = <&tlmm 25 GPIO_ACTIVE_HIGH>;
++	function = LED_FUNCTION_WAN;
+  };
++
++/ {
++	jz0145-sim-switch {
++		compatible = "gpio-leds";
++		/* node dummy: mengunci level GPIO mux SIM agar QMI/MCFG
++		 * ROW stabil di OpenWrt (S1 on, S2 on, S3 off, simdet on) */
++		s1 {
++			function = "s1";
++			gpios = <&tlmm 22 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++		s2 {
++			function = "s2";
++			gpios = <&tlmm 23 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++		s3 {
++			function = "s3";
++			gpios = <&tlmm 1 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
++		simdet {
++			function = "simdet";
++			gpios = <&tlmm 52 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
++};
