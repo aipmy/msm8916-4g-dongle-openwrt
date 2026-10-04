@@ -71,11 +71,9 @@ jobs:
         echo "--- diff config-6.12 ---"
         diff -u "$CFG.bak" "$CFG" || true
         # 2. DTS patch JZ0145 (LED R25/G6/B7 + SIM switch)
-        cp openwrt-build/patches/dts-jz0145-leds-sim.patch /tmp/jz.patch
-        # patch diterapkan ke file DTS upstream setelah checkout (kernel tree belum ada, simpan untuk dokumentasi;
-        # build memakai override via KERNEL_PATCHVER dir di bawah)
-        mkdir -p openwrt/target/linux/msm89xx/patches-6.12
-        cp openwrt-build/patches/dts-jz0145-leds-sim.patch openwrt/target/linux/msm89xx/patches-6.12/910-jz0145-leds-sim.patch
+        # Salin langsung ke folder patches/ agar tidak memicu fallback PATCH_DIR
+        # yang mengabaikan patch upstream (seperti 804 generic-uf02)
+        cp openwrt-build/patches/dts-jz0145-leds-sim.patch openwrt/target/linux/msm89xx/patches/910-jz0145-leds-sim.patch
         # 3. Diffconfig final (upstream + kmod ledtrig + tools)
         cp openwrt-build/diffconfig_uz801 openwrt/.config
         echo "--- .config head ---"
