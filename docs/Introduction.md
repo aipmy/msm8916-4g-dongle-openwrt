@@ -26,44 +26,60 @@ Below are reference photographs of the classic dongle casing, PCB layout, Qualco
 
 ## Device Specifications & Hardware Info
 
-The heart of these dongles is a Qualcomm Snapdragon 410 (MSM8916 SoC) paired with a PM8916 PMIC and 4GB eMMC storage. In stock factory Android configurations, two CPU cores are typically disabled or restricted to prevent thermal runaway.
+The heart of these dongles is a **Qualcomm Snapdragon 410 (MSM8916 SoC)** featuring a **Quad-Core 64-bit ARM Cortex-A53** processor, paired with a PM8916 PMIC and 4GB eMMC storage.
 
-### Processor Information (`/proc/cpuinfo`)
+> **Key Difference Under OpenWrt**:
+> - Under **Factory Android (KitKat)**, the system was artificially locked to 32-bit (`ARMv7`) and restricted to only **2 active cores** to avoid overheating.
+> - Under **OpenWrt (Linux Kernel 6.12+)**, all **4 Cores are fully unlocked in native 64-bit mode (`ARMv8-A / aarch64`)** with hardware acceleration (`fp`, `asimd`, `crc32`, `cpuid`).
+
+### Processor Information (`/proc/cpuinfo` under OpenWrt)
 ```text
 processor       : 0
-model name      : ARMv7 Processor rev 0 (v7l)
-BogoMIPS        : 38.40
-Features        : swp half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt
+BogoMIPS        : 38.00
+Features        : fp asimd evtstrm crc32 cpuid
 CPU implementer : 0x41
-CPU architecture: 7
+CPU architecture: 8
 CPU variant     : 0x0
 CPU part        : 0xd03
 CPU revision    : 0
 
 processor       : 1
-model name      : ARMv7 Processor rev 0 (v7l)
-BogoMIPS        : 38.40
-Features        : swp half thumb fastmult vfp edsp neon vfpv3 tls vfpv4 idiva idivt
+BogoMIPS        : 38.00
+Features        : fp asimd evtstrm crc32 cpuid
 CPU implementer : 0x41
-CPU architecture: 7
+CPU architecture: 8
 CPU variant     : 0x0
 CPU part        : 0xd03
 CPU revision    : 0
 
-Hardware        : Qualcomm Technologies, Inc MSM8916
-Revision        : 0000
-Serial          : 0000000000000000
-Processor       : ARMv7 Processor rev 0 (v7l)
+processor       : 2
+BogoMIPS        : 38.00
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x0
+CPU part        : 0xd03
+CPU revision    : 0
+
+processor       : 3
+BogoMIPS        : 38.00
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : 0x41
+CPU architecture: 8
+CPU variant     : 0x0
+CPU part        : 0xd03
+CPU revision    : 0
 ```
 
-### Memory Information (`/proc/meminfo`)
+### Memory Information (`/proc/meminfo` under OpenWrt)
 ```text
-MemTotal:         397808 kB (~384 MB / 512 MB LPDDR3)
-MemFree:           36072 kB
-Buffers:            7876 kB
-Cached:           115924 kB
-SwapTotal:        196604 kB
-SwapFree:         193548 kB
+MemTotal:         391280 kB (~384 MB / 512 MB LPDDR3)
+MemFree:          214544 kB (~210 MB Free)
+MemAvailable:     275824 kB (~270 MB Available)
+Buffers:            1044 kB
+Cached:            86928 kB
+SwapTotal:        195580 kB (ZRAM compressed swap)
+SwapFree:         195580 kB
 ```
 
 ---
