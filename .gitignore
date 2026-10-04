@@ -1,0 +1,24 @@
+# OS Files
+.DS_Store
+*.swp
+*~
+
+# Python cache & venv
+__pycache__/
+*.pyc
+*.pyo
+venv/
+edl/venv/
+edl/logs/
+*.log
+
+# Temporary build / unpack folders
+squashfs-root/
+/tmp/
+
+# Large backup binaries (Ignore dumps to keep git repo light)
+backups/*/full_dump_*.bin
+backups/*.bin
+full_dump_*.bin
+*.bin.gz
+*.bin.tar.gz
