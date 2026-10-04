@@ -1,9 +1,41 @@
 --- a/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
 +++ b/arch/arm64/boot/dts/qcom/msm8916-yiming-uz801v3.dts
-@@ -13,18 +13,50 @@
+@@ -7,22 +7,54 @@
+ / {
+ 	model = "uz801 v3.0 4G Modem Stick";
+ 	compatible = "yiming,uz801-v3", "qcom,msm8916";
++
++	leds {
++		s1 {
++			function = "s1";
++			gpios = <&tlmm 22 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		s2 {
++			function = "s2";
++			gpios = <&tlmm 23 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++
++		s3 {
++			function = "s3";
++			gpios = <&tlmm 1 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
++
++		simdet {
++			function = "simdet";
++			gpios = <&tlmm 52 GPIO_ACTIVE_HIGH>;
++			default-state = "on";
++		};
++	};
+ };
+ 
+ &button_restart {
  	gpios = <&tlmm 23 GPIO_ACTIVE_LOW>;
  };
-
+ 
 -&led_b {
 -	gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
 +&led_r {
@@ -11,47 +43,19 @@
 +	default-state = "off";
 +	function = LED_FUNCTION_POWER;
  };
-
+ 
  &led_g {
 -	gpios = <&tlmm 8 GPIO_ACTIVE_HIGH>;
 +	gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
 +	default-state = "on";
 +	function = LED_FUNCTION_WAN;
  };
-
+ 
 -&led_r {
 +&led_b {
  	gpios = <&tlmm 7 GPIO_ACTIVE_HIGH>;
 +	default-state = "off";
 +	function = LED_FUNCTION_WLAN;
  };
-
-+&leds {
-+	s1 {
-+		function = "s1";
-+		gpios = <&tlmm 22 GPIO_ACTIVE_HIGH>;
-+		default-state = "on";
-+	};
-+
-+	s2 {
-+		function = "s2";
-+		gpios = <&tlmm 23 GPIO_ACTIVE_HIGH>;
-+		default-state = "on";
-+	};
-+
-+	s3 {
-+		function = "s3";
-+		gpios = <&tlmm 1 GPIO_ACTIVE_HIGH>;
-+		default-state = "off";
-+	};
-+
-+	simdet {
-+		function = "simdet";
-+		gpios = <&tlmm 52 GPIO_ACTIVE_HIGH>;
-+		default-state = "on";
-+	};
-+};
-+
+ 
  &button_default {
- 	pins = "gpio23";
- 	bias-pull-up;
