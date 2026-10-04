@@ -14,6 +14,7 @@
 
 - [Introduction](docs/Introduction.md)
 - [Firmware Dump and Restore](docs/Firmware-Dump-and-Restore.md)
+- [Customizing & Building OpenWrt](docs/Build-Guide.md)
 - [Modifications](docs/Modifications.md)
 - [OpenWRT](docs/OpenWRT.md)
 - [Recovery](docs/Recovery.md)
