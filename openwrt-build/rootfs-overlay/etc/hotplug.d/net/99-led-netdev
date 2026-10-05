@@ -1,0 +1,12 @@
+#!/bin/sh
+# Trigger /etc/init.d/led reload when network devices come up
+# This ensures kernel netdev triggers (e.g. wwan0 or br-lan) bind properly
+# even if interfaces appear after initial S96led bootup.
+
+[ "$ACTION" = "add" ] || exit 0
+
+case "$INTERFACE" in
+	wwan*|br-lan)
+		/etc/init.d/led reload >/dev/null 2>&1
+		;;
+esac

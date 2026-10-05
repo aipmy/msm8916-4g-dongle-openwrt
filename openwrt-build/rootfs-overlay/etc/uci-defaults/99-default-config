@@ -39,6 +39,22 @@ uci -q set system.@led[-1].name="Power"
 uci -q set system.@led[-1].sysfs="red:power"
 uci -q set system.@led[-1].trigger="default-on"
 
+# Blue LED: netdev on br-lan (Wi-Fi/LAN Link/Activity indicator)
+uci -q add system led
+uci -q set system.@led[-1].name="LAN"
+uci -q set system.@led[-1].sysfs="blue:wlan"
+uci -q set system.@led[-1].trigger="netdev"
+uci -q set system.@led[-1].dev="br-lan"
+uci -q set system.@led[-1].mode="link tx rx"
+
+# Green LED: netdev on wwan0 (Cellular WAN Link/Activity indicator)
+uci -q add system led
+uci -q set system.@led[-1].name="WAN"
+uci -q set system.@led[-1].sysfs="green:wan"
+uci -q set system.@led[-1].trigger="netdev"
+uci -q set system.@led[-1].dev="wwan0"
+uci -q set system.@led[-1].mode="link tx rx"
+
 # 7. DNS Fallback (Cloudflare & Google)
 uci -q add_list network.lan.dns="1.1.1.1"
 uci -q add_list network.lan.dns="8.8.8.8"
