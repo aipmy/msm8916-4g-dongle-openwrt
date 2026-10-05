@@ -1,0 +1,28 @@
+#!/bin/sh
+# Modem/cellular LED: link status via kernel netdev trigger (wwan0),
+# with static fallback for kernels without CONFIG_LEDS_TRIGGER_NETDEV.
+LED="/sys/class/leds/green:wan"
+[ -d "$LED" ] || exit 0
+
+set_led() {
+	echo none > "$LED/trigger"
+	echo "$1" > "$LED/brightness"
+}
+
+case "$ACTION:$INTERFACE" in
+	ifup:modem)
+		if grep -qw netdev "$LED/trigger" 2>/dev/null; then
+			echo netdev > "$LED/trigger"
+			echo wwan0 > "$LED/device_name"
+			echo 1 > "$LED/link"
+			echo 1 > "$LED/tx"
+			echo 1 > "$LED/rx"
+			echo 1 > "$LED/brightness"
+		else
+			set_led 1
+		fi
+		;;
+	ifdown:modem)
+		set_led 0
+		;;
+esac

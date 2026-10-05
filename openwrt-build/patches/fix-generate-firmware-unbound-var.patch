@@ -1,0 +1,24 @@
+--- a/target/linux/msm89xx/image/generate_firmware.sh
++++ b/target/linux/msm89xx/image/generate_firmware.sh
+@@ -11,7 +11,7 @@
+ OUT_FILE="${1:-uz801v3-firmware.zip}"
+ 
+ # Respect OpenWrt-provided TMPDIR if present; otherwise create a private one and clean up on exit.
+-CLEANUP_DIR=""
++CLEANUP_DIR=""
+-if [ -z "$TMPDIR" ]; then
++if [ -z "${TMPDIR:-}" ]; then
+   TMPDIR="$(mktemp -d)"
+   CLEANUP_DIR="$TMPDIR"
+ fi
+@@ -21,7 +21,7 @@
+ BUILDDIR="$TMPDIR/msm8916-firmware-build"
+ mkdir -p "$BUILDDIR"
+ 
+ # Detect OpenWrt toolchain (preferred) and fall back to host tools if necessary.
+ # Populate AARCH64_* for qhypstub and ARM_CROSS for lk2nd.
+-if [ -n "$STAGING_DIR" ]; then
++if [ -n "${STAGING_DIR:-}" ]; then
+   # Try to locate OpenWrt AArch64 toolchain (musl or non-musl prefix)
+   TOOLCHAIN_DIR="$(find "$STAGING_DIR/../toolchain-"* -maxdepth 0 -type d 2>/dev/null | head -1 || true)"
+   if [ -n "$TOOLCHAIN_DIR" ] && [ -d "$TOOLCHAIN_DIR/bin" ]; then

@@ -85,7 +85,14 @@ jobs:
         # Salin langsung ke folder patches/ agar tidak memicu fallback PATCH_DIR
         # yang mengabaikan patch upstream (seperti 804 generic-uf02)
         cp openwrt-build/patches/dts-jz0145-leds-sim.patch openwrt/target/linux/msm89xx/patches/910-jz0145-leds-sim.patch
-        # 3. Diffconfig final (upstream + kmod ledtrig + tools)
+        # 3. Patch upstream generate_firmware.sh fix unbound variable under set -u
+        sed -i 's/if \[ -z "$TMPDIR" \];/if [ -z "${TMPDIR:-}" ];/' openwrt/target/linux/msm89xx/image/generate_firmware.sh || true
+        sed -i 's/if \[ -n "$STAGING_DIR" \];/if [ -n "${STAGING_DIR:-}" ];/' openwrt/target/linux/msm89xx/image/generate_firmware.sh || true
+        # 4. Injeksi hotplug 99-modem-led (netdev-aware) langsung ke base-files image
+        mkdir -p openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface
+        cp openwrt-build/rootfs-overlay/etc/hotplug.d/iface/99-modem-led openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface/99-modem-led
+        chmod +x openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface/99-modem-led
+        # 5. Diffconfig final (upstream + kmod ledtrig + tools)
         cp openwrt-build/diffconfig_uz801 openwrt/.config
         echo "--- .config head ---"
         head -n 20 openwrt/.config
