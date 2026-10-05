@@ -17,11 +17,14 @@ uci -q del_list uhttpd.main.lua_prefix="/cgi-bin/luci=/usr/lib/lua/luci/sgi/uhtt
 uci -q del_list uhttpd.main.ucode_prefix="/cgi-bin/luci=/usr/share/ucode/luci/uhttpd.uc"
 uci add_list uhttpd.main.ucode_prefix="/cgi-bin/luci=/usr/share/ucode/luci/uhttpd.uc"
 
-# 3. Clean up ports and board json
+# 3. Web terminal autologin as root (no password prompt inside LuCI web terminal)
+uci -q set ttyd.@ttyd[0].command="/bin/login -f root"
+
+# 4. Clean up ports and board json
 uci -q del_list "network.@device[0].ports=eth0" 2>/dev/null || true
 sed -i "s/\"device\": \"eth0\"/\"device\": \"br-lan\"/g" /etc/board.json 2>/dev/null || true
 
-# 4. Remove target-specific APK feed
+# 5. Remove target-specific APK feed
 sed -i "\|/targets/msm89xx/msm8916/packages|d" /etc/apk/repositories.d/distfeeds.list 2>/dev/null || true
 
 uci commit
