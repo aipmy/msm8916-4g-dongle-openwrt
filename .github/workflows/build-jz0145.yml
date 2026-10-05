@@ -88,10 +88,15 @@ jobs:
         # 3. Patch upstream generate_firmware.sh fix unbound variable under set -u
         sed -i 's/if \[ -z "$TMPDIR" \];/if [ -z "${TMPDIR:-}" ];/' openwrt/target/linux/msm89xx/image/generate_firmware.sh || true
         sed -i 's/if \[ -n "$STAGING_DIR" \];/if [ -n "${STAGING_DIR:-}" ];/' openwrt/target/linux/msm89xx/image/generate_firmware.sh || true
-        # 4. Injeksi hotplug 99-modem-led (netdev-aware) langsung ke base-files image
-        mkdir -p openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface
-        cp openwrt-build/rootfs-overlay/etc/hotplug.d/iface/99-modem-led openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface/99-modem-led
+        # 4. Injeksi rootfs-overlay lengkap ke base-files image
+        #    (99-modem-led netdev-aware + 99-default-config: modem, uhttpd ucode,
+        #     ttyd auto-login root, WiFi AP on, WIB timezone, red:power LED, DNS fallback)
+        mkdir -p openwrt/target/linux/msm89xx/base-files
+        cp -a openwrt-build/rootfs-overlay/. openwrt/target/linux/msm89xx/base-files/
         chmod +x openwrt/target/linux/msm89xx/base-files/etc/hotplug.d/iface/99-modem-led
+        chmod +x openwrt/target/linux/msm89xx/base-files/etc/uci-defaults/99-default-config
+        echo "--- injected base-files overrides ---"
+        find openwrt/target/linux/msm89xx/base-files/etc/hotplug.d openwrt/target/linux/msm89xx/base-files/etc/uci-defaults -type f
         # 5. Diffconfig final (upstream + kmod ledtrig + tools)
         cp openwrt-build/diffconfig_uz801 openwrt/.config
         echo "--- .config head ---"
